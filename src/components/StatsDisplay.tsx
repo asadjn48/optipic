@@ -32,39 +32,40 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
   };
 
   return (
-    <motion.div 
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-      className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch"
-    >
-      {/* Heavy Original Card */}
-      <motion.div variants={itemVariants} className="md:col-span-3 p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 flex flex-col justify-center">
-        <div className="flex items-center gap-2 mb-2 text-zinc-500">
-          <Scale className="w-4 h-4" />
-          <p className="text-[10px] font-bold uppercase tracking-widest">Heavy Original</p>
-        </div>
-        <p className="text-2xl font-mono font-medium text-zinc-300">{formatBytes(originalSize)}</p>
-      </motion.div>
+    // Inside StatsDisplay.tsx return statement:
 
-      {/* Sleek Result Card with visual progress bar */}
-      <motion.div variants={itemVariants} className="md:col-span-4 p-5 rounded-2xl bg-zinc-900/60 border border-zinc-700/80 relative overflow-hidden shadow-inner flex flex-col justify-center">
-        <div className="flex items-center gap-2 mb-2 text-indigo-400">
-          <Sparkles className="w-4 h-4" />
-          <p className="text-[10px] font-bold uppercase tracking-widest">Sleek Result</p>
-        </div>
-        <p className="text-3xl font-mono font-bold text-indigo-400">{formatBytes(compressedSize)}</p>
-        
-        {/* Dynamic Background Bar indicating how much is left */}
-        <div className="absolute bottom-0 left-0 h-1.5 bg-zinc-800 w-full">
-          <motion.div 
-            className="h-full bg-linear-to-r from-indigo-600 to-violet-500 rounded-r-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${100 - percentage}%` }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          />
-        </div>
-      </motion.div>
+<motion.div 
+  variants={containerVariants}
+  initial="hidden"
+  animate="show"
+  className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch"
+>
+  {/* Heavy Original Card */}
+  <motion.div variants={itemVariants} className="md:col-span-3 p-5 rounded-2xl bg-[#12141D] border border-[#24283B] flex flex-col justify-center shadow-lg">
+    <div className="flex items-center gap-2 mb-2 text-slate-500">
+      <Scale className="w-4 h-4" />
+      <p className="text-[10px] font-bold uppercase tracking-widest">Heavy Original</p>
+    </div>
+    <p className="text-2xl font-mono font-medium text-slate-300">{formatBytes(originalSize)}</p>
+  </motion.div>
+
+  {/* Sleek Result Card */}
+  <motion.div variants={itemVariants} className="md:col-span-4 p-5 rounded-2xl bg-[#1A1D2A] border border-[#24283B] relative overflow-hidden shadow-inner flex flex-col justify-center">
+    <div className="flex items-center gap-2 mb-2 text-indigo-400">
+      <Sparkles className="w-4 h-4" />
+      <p className="text-[10px] font-bold uppercase tracking-widest">Sleek Result</p>
+    </div>
+    <p className="text-3xl font-mono font-bold text-indigo-400">{formatBytes(compressedSize)}</p>
+    
+    <div className="absolute bottom-0 left-0 h-1.5 bg-[#0B0C10] w-full">
+      <motion.div 
+        className="h-full bg-linear-to-r from-indigo-600 to-violet-500 rounded-r-full"
+        initial={{ width: 0 }}
+        animate={{ width: `${100 - percentage}%` }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+      />
+    </div>
+  </motion.div>
 
       {/* Massive Download CTA */}
       <motion.div variants={itemVariants} className="md:col-span-5 flex">
